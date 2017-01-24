@@ -1,48 +1,72 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="styles.css" type="text/css" />
+    <head>
+         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
-</head>
-<body>
-	
-<div id="container">
-  
-   <div id="body" class="width">
 
-		
+        <title> My First Web App</title>
 
-		<section id="content">
+    </head>
+    <body>
+        <h1>Give me your info broooooooooooo</h1>
+        <form>
+            Username<br />
+            <input type="text" name="username" />
+            <br /><br />
 
-	    <article>
-	
-                
-                
-                <h1>Welcome to my extremely humble website</h1>
-		    <h2>I am Ee Ansheng from <a href="http://www.dunmanhigh.moe.edu.sg">Dunman High School</a> in Singapore and I am currently 16 years old</h2>
-		    <img src="picture.jpg" style="width:212px;height:274px;">
-</article>
-</section>
-	    <nav>
-	<div class="width">
-    		<ul>
-        		<li class="start selected"><a href="index.html">Home</a></li>
-        	    	<li class=""><a href="interests.html">Interests</a></li>
-			<li class=""><a href="projects.html">Projects</a></li>
-         	   	
-        	</ul>
-	</div>
-    </nav>
+            Gender<br />
+            <input type="radio" name="gender" value="m" /> Male<br />
+            <input type="radio" name="gender" value="f" /> Female
+            <br /><br />
+
+            Devices I own<br />
+            <input type="checkbox" name="devices" value="computer" /> Computer<br />
+            <input type="checkbox" name="devices" value="phone" /> Phone<br />
+
+            <input type="submit" value="Give up my info"
+
+        </form>
+
+    <div>
+            <form action="." method="POST">
+                <textarea name="contents" placeholder="Enter a comment"></textarea>
+                <input type="submit" value="Post comment">
+            </form>
+        </div>
+        <nav class="navbar navbar-inverse">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">My scratchpad</a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="container">
+
+            {% for comment in comments %}
+                <div class="row">
+                    {{ comment }}
+                </div>
+            {% endfor %}
+
+            <div class="row">
+                <form action="." method="POST">
+                    <textarea class="form-control" name="contents" placeholder="Enter a comment"></textarea>
+                    <input type="submit" value="Post comment">
+                </form>
+            </div>
+
+        </div>
 
 
-			
-			  
-        
-              
-    	
-</div>
-</body>
+
+    </body>
 </html>
