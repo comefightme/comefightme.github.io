@@ -35,7 +35,7 @@ width:100%;
 
 		
 		#container {
-			overflow: hidden;
+			overflow: auto;
 		}
 
 		#container .column {
@@ -43,9 +43,8 @@ width:100%;
 			margin-bottom: -1000em;
 		}
 
-		/* Fix for the footer */
 		* html body {
-			overflow: hidden;
+			overflow: auto;
 		}
 		
 		* html #footer-wrapper {
