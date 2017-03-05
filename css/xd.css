@@ -71,6 +71,7 @@ padding:0;
 			font-size: large;           
 			padding: 0.3em;
 			background: #4169e1;
+			width: 100%;
 		}
 		.button {
 			margin: 10px;
@@ -131,13 +132,14 @@ padding:0;
 		    display: block;
             margin-left: auto;
             margin-right: auto;
+			width: 100%;
 		}
 	
 		.logobtn {
 			left: 0;
 			border: solid white;
 			height: 100px;
-            width: 100px;
+            width: 120px;
             border-radius: 50%;
 			background-color: white;
 			display: inline-block;
