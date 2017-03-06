@@ -54,6 +54,8 @@ padding:0;
 		
 		p {
 			color: white;
+			display: inline-block;
+			top: 30px;
 		}
 
 		nav ul {
@@ -69,7 +71,7 @@ padding:0;
 
 		#header {
 			font-size: large;           
-			padding: 0.3em;
+			padding: 0em;
 			background: #4169e1;
 			width: 100%;
 		}
@@ -141,4 +143,20 @@ padding:0;
 			background-color: white;
 			display: inline-block;
 			cursor:pointer;
+		}
+		.dlogo {
+			height: 70px;
+			width: 70px;
+			border-radius: 8px;
+			
+		}
+		.logobutton {
+			background-color: #4169e1;
+			border-style: solid;
+			border-color: #4169e1;
+			cursor: pointer;
+			text-align: center;
+			display: inline-block;
+			margin: 0 auto;
+			
 		}
