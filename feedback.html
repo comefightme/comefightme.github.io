@@ -3,18 +3,43 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Feedback</title>
+	<link rel="icon" href="img/dlogo.png">
 	<style type="text/css">
 	</style>
 	<link rel="stylesheet" href="css/xd.css">
 	<script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
+
+
+	
+	<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+	
+	<!-- Leave out Storage -->
+	<!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script> -->
+
+	<script>
+	  // Initialize Firebase
+	  var config = {
+		apiKey: "AIzaSyDt8GfOxWHUDaFvE-LOe9oHhYdgXy_ffwQ",
+		authDomain: "useful-app-247ab.firebaseapp.com",
+		databaseURL: "https://useful-app-247ab.firebaseio.com",
+		storageBucket: "useful-app-247ab.appspot.com",
+		messagingSenderId: "226213946699"
+	  };
+	  firebase.initializeApp(config);
+	</script>
 	
 	
 </head>
 
 <body>
     <button class="button" style="" onclick="openNav()">&#9776;</button>
-	<header id="header"><b href="index.html"><button class="logobutton"><img src="img/dlogo.png" class="dlogo"></img></button></b><p>Feedback</p>
+	<header id="header">
+	<a href="index.html"><button class="logobutton"><img src="img/dlogo.png" class="dlogo"></img></button></a><p>Feedback</p>
 	
 	</header>
 		
@@ -34,20 +59,24 @@
 
 		<main id="center" class="column">
 			<article>
+			<input id="feedback" class="textbox" type="text">
+		    <input type="submit" value="Submit" id="submit">
+
 			
-			<a href="http://dunmanhigh.moe.edu.sg/wp-content/uploads/website/index.html"><button class="logobtn" onclick="http://dunmanhigh.moe.edu.sg/wp-content/uploads/website/index.html"><img src="img/logo.png" width ="70" height="70"/></button></a>
-			</article>								
+			</article>	
+			
+
+			<a href="http://dunmanhigh.moe.edu.sg/wp-content/uploads/website/index.html"><button class="logobtn" ><img src="img/logo.png" width ="70" height="70"/></button></a>
+			
 		</main>
 
-		<input type="text">
-		<input type="submit" value="submit feedback" id="submit">
-
+		
 		
 
 	</div>
-
-
-
+	
+	
+	
 </body>
 
 </html>

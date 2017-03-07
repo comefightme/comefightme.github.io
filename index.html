@@ -3,10 +3,18 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Home</title>
+	<link rel="icon" href="img/dlogo.png">
 	<style type="text/css">
 	</style>
 	<link rel="stylesheet" href="css/xd.css">
+	<script src="js/jquery.js"></script>
+	
 	<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
 	<script>
 	  // Initialize Firebase
 	  var config = {
@@ -14,9 +22,66 @@
 		authDomain: "useful-app-247ab.firebaseapp.com",
 		databaseURL: "https://useful-app-247ab.firebaseio.com",
 	  
-	  var database = firebase.database();
+	 
 	  };
 	  firebase.initializeApp(config);
+	</script>
+	<script>
+	//authentication
+
+	var user = firebase.auth().currentUser;
+	var name, email, photoUrl, uid, emailVerified;
+	var provider = new firebase.auth.GoogleAuthProvider();
+	function toggleSignIn() {
+	  if(user) {
+		  // user is signed in, sign out
+		  firebase.auth().signOut().then(function() {
+			  // Sign-out successful.
+			  console.log("Sign out successful");
+		  }, function(error) {
+			  // An error happened.
+			  console.log("Sign out error");
+		  });
+	  } else {
+		  firebase.auth().signInWithRedirect(provider);
+	  }
+	}
+	var once = 0;
+	$(document).ready(function () {
+	  once += 34802;
+	  $("#auth").click(function () {
+		  toggleSignIn();
+	  });
+	  if(user){
+		  $("#auth").text("Sign Out");
+		  user = firebase.auth().currentUser;
+	  } else if(once < 1){
+		  firebase.auth().signInWithRedirect(provider);
+		  user = firebase.auth().currentUser;
+		  $("body").text(once);
+		  $("#auth").text("Sign in");
+	  }
+	  firebase.auth().onAuthStateChanged(function(User) {
+		  if (User) {
+			  // User is signed in.
+			  $("#auth").text("Sign Out");
+			  user = firebase.auth().currentUser;
+			  user.providerData.forEach(function (profile) {
+				  console.log("Sign-in provider: "+profile.providerId);
+				  console.log("  Provider-specific UID: "+profile.uid);
+				  console.log("  Name: "+profile.displayName);
+				  console.log("  Email: "+profile.email);
+				  console.log("  Photo URL: "+profile.photoURL);
+			  });
+		  } else {
+			  // No user is signed in.
+			  firebase.auth().signInWithRedirect(provider);
+			  user = firebase.auth().currentUser;
+			  $("#auth").text("Sign in");
+		  }
+	  });
+	});
+	
 	</script>
 	
 	
@@ -27,7 +92,6 @@
 	
 	
 	
-	<script type="text/javascript" src="js/functions.js"></script>
 
 	
 	
@@ -35,7 +99,9 @@
 
 <body>
     <button class="button" style="" onclick="openNav()">&#9776;</button>
-	<header id="header"><b href="index.html"><button class="logobutton"><img src="img/dlogo.png" class="dlogo"></img></button></b><p>DoYourDuty</p>
+	<header id="header">
+	<a href="index.html"><button class="logobutton"><img src="img/dlogo.png" class="dlogo"></img></button></a>
+	<p>DoYourDuty</p>
 	
 	</header>
 		
@@ -58,7 +124,9 @@
 			<img src="img/class pic.jpg" style=""></img>
 			<a href="http://dunmanhigh.moe.edu.sg/wp-content/uploads/website/index.html"><button class="logobtn" onclick="http://dunmanhigh.moe.edu.sg/wp-content/uploads/website/index.html"><img src="img/logo.png" width ="60" height="70"/></button></a>
 			
-			</article>								
+			</article>
+<script type="text/javascript" src="js/functions.js"></script>			
+<button class="button" style="" onclick="toggleSignIn()" id="auth">&#9776;</button>			
 		</main>
 
 	</div>

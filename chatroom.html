@@ -3,19 +3,48 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Chatroom</title>
+	<link rel="icon" href="img/dlogo.png">
 	<style type="text/css">
 	</style>
 	<link rel="stylesheet" href="css/xd.css">
+	
+	<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+	
+
+	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="js/firebase.js"></script>
+
+	
+	
+	
+	<!-- Leave out Storage -->
+	<!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script> -->
+
+	<script>
+	  // Initialize Firebase
+	  var config = {
+		apiKey: "AIzaSyDt8GfOxWHUDaFvE-LOe9oHhYdgXy_ffwQ",
+		authDomain: "useful-app-247ab.firebaseapp.com",
+		databaseURL: "https://useful-app-247ab.firebaseio.com",
+		storageBucket: "useful-app-247ab.appspot.com",
+		messagingSenderId: "226213946699"
+	  };
+	  firebase.initializeApp(config);
+	</script>
 	
 	
 </head>
 
 <body>
     <button class="button" style="" onclick="openNav()">&#9776;</button>
-	<header id="header"><b href="index.html"><button class="logobutton"><img src="img/dlogo.png" class="dlogo"></img></button></b><p>Chatroom</p>
-	
+	<header id="header"><a href="index.html"><button class="logobutton"><img src="img/dlogo.png" class="dlogo"></img></button></a><p>Chatroom</p>
+
 	</header>
 		
 		<div id="mySidenav" class="sidenav">
@@ -34,9 +63,31 @@
 
 		<main id="center" class="column">
 			<article>
-			
+			<input id="username" type="text" placeholder="Name"><br/>
+			  <input id="text" type="text" placeholder="Message"><br/>
+			  <button id="post">Post</button><br/>
+			  <div id="results"></div>
+			  <script>
+				var myFirebase = new Firebase('https://FIREBASE-PROJECTID.firebaseio.com/');
+				var usernameInput = document.querySelector('#username');
+				var textInput = document.querySelector('#text');
+				var postButton = document.querySelector('#post');
+
+				postButton.addEventListener("click", function() {
+				  var msgUser = usernameInput.value;
+				  var msgText = textInput.value;
+				  myFirebase.set(msgUser + " says: " + msgText);
+				  textInput.value = "";
+				});
+				
+				
+				
+				
+				
+			  </script>
+			</article>	
 			<a href="http://dunmanhigh.moe.edu.sg/wp-content/uploads/website/index.html"><button class="logobtn" onclick="http://dunmanhigh.moe.edu.sg/wp-content/uploads/website/index.html"><img src="img/logo.png" width ="70" height="70"/></button></a>
-			</article>								
+			
 		</main>
 
 		
@@ -46,7 +97,19 @@
 	</div>
 
 
-
+<ul id="chat-list">
+  </ul>
+  <input type="text" id="msg"/>
+  <input type="button" id="send" value="Send"/>
+  <div class="box box-flex">
+    <input type='text' id='nameInput' class="name" placeholder='Name'>
+    <input type='text' id='messageInput' class="message box-flex-item" placeholder='Message' autofocus>
+    <a href="javascript:" id="btnSendMessage" class="button">Send</a>
+  </div>
+  <hr />
+  <div class="box">
+    <div id='messagesDiv'></div>
+  </div>
 </body>
 
 </html>
