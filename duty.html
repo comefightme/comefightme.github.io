@@ -7,16 +7,96 @@
 	<style type="text/css">
 	</style>
 	<link rel="stylesheet" href="css/xd.css">
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
+	
+	
+	
+	
+	<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+	
+	<!-- Leave out Storage -->
+	<!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script> -->
+
+	<script>
+	  // Initialize Firebase
+	  var config = {
+		apiKey: "AIzaSyDt8GfOxWHUDaFvE-LOe9oHhYdgXy_ffwQ",
+		authDomain: "useful-app-247ab.firebaseapp.com",
+		databaseURL: "https://useful-app-247ab.firebaseio.com",
+		storageBucket: "useful-app-247ab.appspot.com",
+		messagingSenderId: "226213946699"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+	<script>
+	//authentication
+
+	var user = firebase.auth().currentUser;
+	var name, email, photoUrl, uid, emailVerified;
+	var provider = new firebase.auth.GoogleAuthProvider();
+	function toggleSignIn() {
+	  if(user) {
+		  // user is signed in, sign out
+		  firebase.auth().signOut().then(function() {
+			  // Sign-out successful.
+			  console.log("Sign out successful");
+		  }, function(error) {
+			  // An error happened.
+			  console.log("Sign out error");
+		  });
+	  } else {
+		  firebase.auth().signInWithRedirect(provider);
+	  }
+	}
+	var once = 0;
+	$(document).ready(function () {
+	  once += 34802;
+	  $("#auth").click(function () {
+		  toggleSignIn();
+	  });
+	  if(user){
+		  $("#auth").text("Sign Out");
+		  user = firebase.auth().currentUser;
+	  } else if(once < 1){
+		  firebase.auth().signInWithRedirect(provider);
+		  user = firebase.auth().currentUser;
+		  $("body").text(once);
+		  $("#auth").text("Sign in");
+	  }
+	  firebase.auth().onAuthStateChanged(function(User) {
+		  if (User) {
+			  // User is signed in.
+			  $("#auth").text("Sign Out");
+			  user = firebase.auth().currentUser;
+			  user.providerData.forEach(function (profile) {
+				  console.log("Sign-in provider: "+profile.providerId);
+				  console.log("  Provider-specific UID: "+profile.uid);
+				  console.log("  Name: "+profile.displayName);
+				  console.log("  Email: "+profile.email);
+				  console.log("  Photo URL: "+profile.photoURL);
+			  });
+		  } else {
+			  // No user is signed in.
+			  firebase.auth().signInWithRedirect(provider);
+			  user = firebase.auth().currentUser;
+			  $("#auth").text("Sign in");
+		  }
+	  });
+	});
+	
+	</script>
 	
 	
 </head>
 
 <body>
     <button class="button" style="" onclick="openNav()">&#9776;</button>
-	<header id="header"><a href="index.html"><button class="logobutton"><img src="img/dlogo.png" class="dlogo"></img></button></a>
-<p>Duty Roster</p>
+	<header id="header"><a href="index.html"><button class="logobutton"><img src="img/dlogo.png" class="dlogo"></img></button></a><p>Duty Roster</p>
 	
 	</header>
 		
@@ -25,8 +105,11 @@
 	  <a href="index.html">Home</a>
 	  <a href="timetable.html">Timetable</a>
 	  <a href="duty.html">Duty Roster</a>
+	  <a href="suggestion.html">Suggestion Box</a>
 	  <a href="feedback.html">Feedback</a>
-	  <a href="chatroom.html">Chatroom</a>
+	  
+	  <button class="signin" style="" onclick="toggleSignIn()" id="auth">Sign In</button>
+	  
 	  <a href="easter.html" style="color:white">Prank</a>
 	  
 		</div>
@@ -40,8 +123,9 @@
 
 
 <table style="width:100%">
-  <caption>Duty Roster</caption>
+  <caption>Duty Roster, not working feelsbad</caption>
   <tr>
+    <th>Duty</th>
     <th>Monday</th>
     <th>Tuesday</th>
 	<th>Wednesday</th>
@@ -49,36 +133,41 @@
 	<th>Friday</th>
   </tr>
   <tr>
-    <td><input type="button" id="button" value = "click" style= "color:black" onclick="setColor('button', '#101010')";/></td>
-    <td><input type="button" id="button1" value = "click" style= "color:black" onclick="setColor('button1', '#101010')";/></td></td>
-	<td><input type="button" id="button2" value = "click" style= "color:black" onclick="setColor('button2', '#101010')";/></td></td>
-	<td><input type="button" id="button3" value = "click" style= "color:black" onclick="setColor('button3', '#101010')";/></td></td>
-	<td><input type="button" id="button4" value = "click" style= "color:black" onclick="setColor('button4', '#101010')";/></td></td>
+    <th>Dustbin/IC</th>
+    <td><input type="button" class="dutybtn" id="button" value = "Zilong" style= "color:black" onclick="setColor('button', '#101010')";/></td>
+    <td><input type="button" class="dutybtn" id="button1" value = "Yu Quan" style= "color:black" onclick="setColor('button1', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button2" value = "Ivan" style= "color:black" onclick="setColor('button2', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button3" value = "Jeffrey" style= "color:black" onclick="setColor('button3', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button4" value = "Ansheng" style= "color:black" onclick="setColor('button4', '#101010')";/></td></td>
   </tr>
   <tr>
-    <td><input type="button" id="button5" value = "click" style= "color:black" onclick="setColor('button5', '#101010')";/></td></td>
-    <td><input type="button" id="button6" value = "click" style= "color:black" onclick="setColor('button6', '#101010')";/></td></td>
-	<td><input type="button" id="button7" value = "click" style= "color:black" onclick="setColor('button7', '#101010')";/></td></td>
-	<td><input type="button" id="button8" value = "click" style= "color:black" onclick="setColor('button8', '#101010')";/></td></td>
-	<td><input type="button" id="button9" value = "click" style= "color:black" onclick="setColor('button9', '#101010')";/></td></td>
+  <th>Floor</th>
+    <td><input type="button" class="dutybtn" id="button5" value = "Ee Heng" style= "color:black" onclick="setColor('button5', '#101010')";/></td></td>
+    <td><input type="button" class="dutybtn" id="button6" value = "Siau wee" style= "color:black" onclick="setColor('button6', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button7" value = "He Kun" style= "color:black" onclick="setColor('button7', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button8" value = "Kuro" style= "color:black" onclick="setColor('button8', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button9" value = "Gaston" style= "color:black" onclick="setColor('button9', '#101010')";/></td></td>
   </tr><tr>
-    <td><input type="button" id="button10" value = "click" style= "color:black" onclick="setColor('button10', '#101010')";/></td></td>
-    <td><input type="button" id="button11" value = "click" style= "color:black" onclick="setColor('button11', '#101010')";/></td></td>
-	<td><input type="button" id="button12" value = "click" style= "color:black" onclick="setColor('button12', '#101010')";/></td></td>
-	<td><input type="button" id="button13" value = "click" style= "color:black" onclick="setColor('button13', '#101010')";/></td></td>
-	<td><input type="button" id="button14" value = "click" style= "color:black" onclick="setColor('button14', '#101010')";/></td></td>
+  <th>Floor</th>
+    <td><input type="button" class="dutybtn" id="button10" value = "JJ" style= "color:black" onclick="setColor('button10', '#101010')";/></td></td>
+    <td><input type="button" class="dutybtn" id="button11" value = "Hong Zhao" style= "color:black" onclick="setColor('button11', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button12" value = "Pearlyn" style= "color:black" onclick="setColor('button12', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button13" value = "Xiao Chen" style= "color:black" onclick="setColor('button13', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button14" value = "Jingwen" style= "color:black" onclick="setColor('button14', '#101010')";/></td></td>
   </tr><tr>
-    <td><input type="button" id="button15" value = "click" style= "color:black" onclick="setColor('button15', '#101010')";/></td></td>
-    <td><input type="button" id="button16" value = "click" style= "color:black" onclick="setColor('button16', '#101010')";/></td></td>
-	<td><input type="button" id="button17" value = "click" style= "color:black" onclick="setColor('button17', '#101010')";/></td></td>
-	<td><input type="button" id="button18" value = "click" style= "color:black" onclick="setColor('button18', '#101010')";/></td></td>
-	<td><input type="button" id="button19" value = "click" style= "color:black" onclick="setColor('button19', '#101010')";/></td></td>
+  <th>Desks</th>
+    <td><input type="button" class="dutybtn" id="button15" value = "Ze Rong" style= "color:black" onclick="setColor('button15', '#101010')";/></td></td>
+    <td><input type="button" class="dutybtn" id="button16" value = "Yan zhou" style= "color:black" onclick="setColor('button16', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button17" value = "Jan" style= "color:black" onclick="setColor('button17', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button18" value = "Jade" style= "color:black" onclick="setColor('button18', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button19" value = "Hong Liang" style= "color:black" onclick="setColor('button19', '#101010')";/></td></td>
   </tr><tr>
-    <td><input type="button" id="button20" value = "click" style= "color:black" onclick="setColor('button20', '#101010')";/></td></td>
-    <td><input type="button" id="button21" value = "click" style= "color:black" onclick="setColor('button21', '#101010')";/></td></td>
-	<td><input type="button" id="button22" value = "click" style= "color:black" onclick="setColor('button22', '#101010')";/></td></td>
-	<td><input type="button" id="button23" value = "click" style= "color:black" onclick="setColor('button23', '#101010')";/></td></td>
-	<td><input type="button" id="button24" value = "click" style= "color:black" onclick="setColor('button24', '#101010')";/></td></td>
+  <th>Whiteboard</th>
+    <td><input type="button" class="dutybtn" id="button20" value = "Bernetta" style= "color:black" onclick="setColor('button20', '#101010')";/></td></td>
+    <td><input type="button" class="dutybtn" id="button21" value = "Yu Quan" style= "color:black" onclick="setColor('button21', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button22" value = "Ke ning" style= "color:black" onclick="setColor('button22', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button23" value = "Alex" style= "color:black" onclick="setColor('button23', '#101010')";/></td></td>
+	<td><input type="button" class="dutybtn" id="button24" value = "Anthony" style= "color:black" onclick="setColor('button24', '#101010')";/></td></td>
   </tr>
 </table>
 

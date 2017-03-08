@@ -2,13 +2,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Timetable</title>
+	<title>Suggestion Box</title>
 	<link rel="icon" href="img/dlogo.png">
 	<style type="text/css">
 	</style>
 	<link rel="stylesheet" href="css/xd.css">
 	<script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/functions.js"></script>
+    
+
+
+	
 	<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
@@ -28,6 +31,8 @@
 		messagingSenderId: "226213946699"
 	  };
 	  firebase.initializeApp(config);
+	  var rootRef = firebase.database().ref();
+	  var database = firebase.database();	
 	</script>
 	<script>
 	//authentication
@@ -86,13 +91,13 @@
 	});
 	
 	</script>
-	
-	
+	<script type="text/javascript" src="js/functions.js"></script>
 </head>
 
 <body>
     <button class="button" style="" onclick="openNav()">&#9776;</button>
-	<header id="header"><a href="index.html"><button class="logobutton"><img src="img/dlogo.png" class="dlogo"></img></button></a><p>Timetable</p>
+	<header id="header">
+	<a href="index.html"><button class="logobutton"><img src="img/dlogo.png" class="dlogo"></img></button></a><p>Suggestion Box</p>
 	
 	</header>
 		
@@ -114,17 +119,34 @@
 
 		<main id="center" class="column">
 			<article>
-			<img src="img/timetable.jpg" alt="timetable" >
-			<a href="http://dunmanhigh.moe.edu.sg/wp-content/uploads/website/index.html"><button class="logobtn" onclick="http://dunmanhigh.moe.edu.sg/wp-content/uploads/website/index.html"><img src="img/logo.png" width ="70" height="70"/></button></a>
-			</article>								
+			<h3>Enter your suggestions to the class comm here. All responses will be anonymous.</h3>
+			<input id="feedback" class="textbox" type="text">
+		    <input type="submit" value="Submit" id="submit">
+
+			
+			</article>	
+			
+
+			<a href="http://dunmanhigh.moe.edu.sg/wp-content/uploads/website/index.html"><button class="logobtn" ><img src="img/logo.png" width ="70" height="70"/></button></a>
+			
 		</main>
 
 		
-
 		
 
 	</div>
+	
+	
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-93204401-1', 'auto');
+  ga('send', 'pageview');
 
+</script>
+</body>
 
 </html>

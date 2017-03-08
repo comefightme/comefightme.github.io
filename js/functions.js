@@ -7,8 +7,8 @@ function closeNav() {
 }
 
 // Get a reference to the database service
-var database = firebase.database();
 
+// duty thing no backend for this one because took too much time and I gave up
 var count = 1;
     function setColor(btn, color) {
         var property = document.getElementById(btn);
@@ -22,11 +22,8 @@ var count = 1;
         }
     }
 	
-$(document).ready(function () {
-	$("#submit").click(function () {
-		database.ref().push($("#feedback").val());
-	});
-});
+
+
 
 
 
@@ -86,55 +83,10 @@ $(document).ready(function () {
 	  }
   });
 });
-var kdata = new Firebase(); 
 
-
-$('#messageInput').on('keypress', function(e) {
-  if (e.keyCode == 13) {
-    sendMessage(e);
-  }
-});
-$('#btnSendMessage').on('click', function(e) {
-  sendMessage(e);
-});
-
-function sendMessage() {
-
-  var name = $('#nameInput').val();
-  var text = $('#messageInput').val();
-
-  if (name == '' || text == '') {
-    return false;
-  }
-
-  saveNickName(name);
-  kdata.push({
-    name: name,
-    text: text
-  });
-  $('#messageInput').val('');
-
-}
-
-function saveNickName(nickname) {
-  localStorage.setItem('nickname', nickname)
-}
-
-function loadNickName() {
-  var nickname = localStorage.getItem('nickname');
-  if (nickname) {
-    $('#nameInput').val(nickname);
-  }
-}
-
-
-kdata.on('child_added', function(snapshot) {
-  var message = snapshot.val();
-  $('<div/>').text(message.text).prepend($('<em/>').text(message.name + ': ')).prependTo($('#messagesDiv'));
-});
-
-$(function() {
-
-  loadNickName();
-
-});
+			$(document).ready(function () {
+			$("#submit").click(function () {
+				database.ref().push($("#feedback").val());
+			});
+		});
+		
